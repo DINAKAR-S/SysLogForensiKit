@@ -1,0 +1,151 @@
+START
+    IMPORT necessary libraries
+
+    DEFINE function get_installed_programs
+        OPEN registry key
+        LOOP through registry keys
+            GET program name
+            APPEND program name to list
+        END LOOP
+        CLOSE registry key
+        RETURN list of installed programs
+    END FUNCTION
+
+    DEFINE function get_running_processes
+        LOOP through running processes
+            GET process name
+            APPEND process name to list
+        END LOOP
+        RETURN list of running processes
+    END FUNCTION
+
+    DEFINE function get_running_services
+        LOOP through running services
+            GET service name
+            APPEND service name to list
+        END LOOP
+        RETURN list of running services
+    END FUNCTION
+
+    DEFINE function get_dns_cache
+        EXECUTE ipconfig command to display DNS cache
+        RETURN DNS cache
+    END FUNCTION
+
+    DEFINE function get_arp_cache
+        EXECUTE arp command to display ARP cache
+        RETURN ARP cache
+    END FUNCTION
+
+    DEFINE function get_system_info
+        GET operating system information
+        GET hardware information
+        RETURN system information
+    END FUNCTION
+
+    DEFINE function get_host_content
+        READ Host file
+        RETURN Host file content
+    END FUNCTION
+
+    DEFINE function get_netbios_established
+        LOOP through network connections
+            FILTER established NetBios connections
+            FORMAT connection details
+            APPEND details to list
+        END LOOP
+        RETURN list of established NetBios connections
+    END FUNCTION
+
+    DEFINE function get_scheduled_tasks
+        EXECUTE schtasks.exe command to query scheduled tasks
+        RETURN scheduled tasks
+    END FUNCTION
+
+    DEFINE function get_active_connections
+        EXECUTE netstat command to display active connections
+        RETURN active connections
+    END FUNCTION
+
+    DEFINE function get_disk_info
+        GET disk information
+        RETURN disk information
+    END FUNCTION
+
+    DEFINE function get_network_info
+        GET network interfaces information
+        GET WIFI information
+        RETURN network information
+    END FUNCTION
+
+    DEFINE function view_drives
+        EXECUTE wmic command to get mapped drives
+        WRITE mapped drives to file
+    END FUNCTION
+
+    DEFINE function create_all_scan
+        READ contents of individual scan files
+        CONCATENATE contents into one file
+        WRITE concatenated content to 'all_scan.txt'
+    END FUNCTION
+
+    DEFINE function PastUSB
+        TRY
+            RETRIEVE USB device history
+            WRITE history to file
+        EXCEPT
+            RAISE exception if error occurs
+        END TRY
+    END FUNCTION
+
+    DISPLAY welcome message and choices
+    READ user choice
+    SWITCH choice
+        CASE 1: VIEW installed programs
+            CALL get_installed_programs function
+            WRITE programs to file
+        CASE 2: VIEW running processes
+            CALL get_running_processes function
+            WRITE processes to file
+        CASE 3: VIEW running services
+            CALL get_running_services function
+            WRITE services to file
+        CASE 4: VIEW DNS cache
+            CALL get_dns_cache function
+            WRITE DNS cache to file
+        CASE 5: VIEW ARP cache
+            CALL get_arp_cache function
+            WRITE ARP cache to file
+        CASE 6: VIEW system information
+            CALL get_system_info function
+            WRITE system information to file
+        CASE 7: VIEW Host file
+            CALL get_host_content function
+            WRITE Host file content to file
+        CASE 8: VIEW established NetBios connections
+            CALL get_netbios_established function
+            WRITE NetBios connections to file
+        CASE 9: VIEW scheduled tasks
+            CALL get_scheduled_tasks function
+            WRITE scheduled tasks to file
+        CASE 10: VIEW active connections or open ports
+            CALL get_active_connections function
+            WRITE active connections to file
+        CASE 11: VIEW disk info
+            CALL get_disk_info function
+            WRITE disk info to file
+        CASE 12: VIEW network and WIFI information
+            CALL get_network_info function
+            WRITE network information to file
+        CASE 13: VIEW mapped drives
+            CALL view_drives function
+        CASE 14: CREATE all scan
+            CALL create_all_scan function
+        CASE 15: VIEW USB Past Information
+            CALL PastUSB function
+        CASE 16: EXIT
+            EXIT program
+        DEFAULT:
+            DISPLAY error message
+    END SWITCH
+END
